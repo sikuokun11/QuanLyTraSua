@@ -63,6 +63,10 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     private AppBarConfiguration mAppBarConfiguration;
     TextView txtFullName;
 
+
+
+
+
     //Firebase
     FirebaseDatabase database;
     DatabaseReference categories;
