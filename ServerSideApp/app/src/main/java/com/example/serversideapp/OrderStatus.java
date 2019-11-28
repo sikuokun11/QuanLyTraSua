@@ -1,18 +1,13 @@
 package com.example.serversideapp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Spinner;
 
 import com.example.serversideapp.Common.Common;
 import com.example.serversideapp.Interface.ItemClickListener;
@@ -21,7 +16,6 @@ import com.example.serversideapp.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.jaredrummler.materialspinner.MaterialSpinner;
 
 public class OrderStatus extends AppCompatActivity {
 
@@ -33,7 +27,6 @@ public class OrderStatus extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference requests;
 
-    MaterialSpinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +35,7 @@ public class OrderStatus extends AppCompatActivity {
 
         //Firebase
         db =  FirebaseDatabase.getInstance();
-        requests = db.getReference("Requests");
+        requests = db.getReference("Request");
 
         //Init
         recyclerView = (RecyclerView)findViewById(R.id.listOrders);
@@ -51,6 +44,7 @@ public class OrderStatus extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         loadOrders();
+
     }
 
     private void loadOrders(){
@@ -61,7 +55,7 @@ public class OrderStatus extends AppCompatActivity {
                 requests
         ){
             @Override
-            protected void populateViewHolder(OrderViewHolder orderViewHolder, final Request request, int i) {
+            protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
                 orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
                 orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
                 orderViewHolder.txtOrderAddress.setText(request.getAddress());
@@ -70,9 +64,7 @@ public class OrderStatus extends AppCompatActivity {
                 orderViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Intent trackingOrder = new Intent(OrderStatus.this, TrackingOrder.class);
-                        Common.currunent_Request = request;
-                        startActivity(trackingOrder);
+
                     }
                 });
             }
@@ -83,50 +75,15 @@ public class OrderStatus extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        if(item.getTitle().equals(Common.UPDATE))
+        if(item.getIntent().equals(Common.UPDATE))
             showUpdateDialog(adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
-        else if(item.getTitle().equals(Common.DELETE))
+        else if(item.getIntent().equals(Common.DELETE))
             deleteOrder(adapter.getRef(item.getOrder()).getKey());
 
         return super.onContextItemSelected(item);
     }
 
-    private void deleteOrder(String key) {
-        requests.child(key).removeValue();
-    }
+    private void showUpdateDialog(String key, Request item) {
 
-    private void showUpdateDialog(String key, final Request item) {
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(OrderStatus.this);
-        alertDialog.setTitle("Update Order");
-        alertDialog.setMessage("Plsase choose status");
-
-        LayoutInflater inflater = this.getLayoutInflater();
-        final View view = inflater.inflate(R.layout.update_order_layout,null);
-
-        spinner = (MaterialSpinner)view.findViewById(R.id.statusSpinner);
-        spinner.setItems("Placed", "On my way","Shipped");
-
-        alertDialog.setView(view);
-
-
-        final String localKey = key;
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                item.setStatus(String.valueOf(spinner.getSelectedIndex()));
-
-                requests.child(localKey).setValue(item);
-            }
-        });
-
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-
-        alertDialog.show();
     }
 }

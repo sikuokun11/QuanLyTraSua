@@ -1,12 +1,10 @@
 package com.example.serversideapp.ViewHolder;
 
-import android.os.Build;
 import android.view.ContextMenu;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.serversideapp.Interface.ItemClickListener;
@@ -16,7 +14,6 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public TextView txtOrderId, txtOrderStatus, txtOrderPhone, txtOrderAddress;
     private ItemClickListener itemClickListener;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
         txtOrderAddress = (TextView)itemView.findViewById(R.id.order_address);
@@ -24,7 +21,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         txtOrderStatus = (TextView)itemView.findViewById(R.id.order_status);
         txtOrderPhone = (TextView)itemView.findViewById(R.id.order_phone);
         itemView.setOnClickListener(this);
-        itemView.setOnCreateContextMenuListener(this);
+        itemView.setOnContextClickListener(this);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -40,6 +37,6 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
         contextMenu.setHeaderTitle("Select The Action");
         contextMenu.add(0,0,getAdapterPosition(), "Update");
-        contextMenu.add(0,1,getAdapterPosition(), "Delete");
+        contextMenu.add(0,1,getAdapterPosition(), "Update");
     }
 }

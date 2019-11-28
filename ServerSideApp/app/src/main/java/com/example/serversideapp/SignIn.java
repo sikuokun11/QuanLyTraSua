@@ -46,18 +46,8 @@ public class SignIn extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Common.isConnectedToInterner(getBaseContext())) {
-
-
-                    signInUser(edtPhone.getText().toString(), edtPassword.getText().toString());
-                }
-                else
-                {
-                    Toast.makeText(SignIn.this,"Please check your connection !!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                signInUser(edtPhone.getText().toString(), edtPassword.getText().toString());
             }
-
         });
     }
 
