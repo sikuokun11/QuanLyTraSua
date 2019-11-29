@@ -96,11 +96,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         setSupportActionBar(toolbar);
 
 
-        //Init Firebase
-        database = FirebaseDatabase.getInstance();
-        categories = database.getReference("Category");
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
