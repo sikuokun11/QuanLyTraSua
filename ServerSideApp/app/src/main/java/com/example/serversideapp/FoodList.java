@@ -206,6 +206,7 @@ public class FoodList extends AppCompatActivity {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             //Don't worry about this error
+                            mDialog.setMessage("Uploaded "+progress+"%");
                             double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
                             mDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
@@ -230,9 +231,11 @@ public class FoodList extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
-                foodViewHolder.food_name.setText(food.getName());
+
+                foodViewHolder.food_name.setText(model.getName());
                 Picasso.with(getBaseContext())
-                        .load(food.getImage())
+                        .load(model.getImage())
+
                         .into(foodViewHolder.food_image);
 
                 foodViewHolder.setItemClickListener(new ItemClickListener() {

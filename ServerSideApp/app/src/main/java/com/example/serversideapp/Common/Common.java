@@ -5,7 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-
+import android.net.Network;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -37,12 +37,14 @@ public class Common {
 
         if(connectivityManager != null)
         {
-            NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
+            Networkinfo[] info = connectivityManager.getAllNetworkInfo();
+
             if(info != null)
             {
                 for(int i = 0; i<info.length;i++)
                 {
-                    if(info[i].getState() == NetworkInfo.State.CONNECTED)
+                    if(info[i].getState == Networkinfo.State.CONNECTED)
+
                         return true;
                 }
 
