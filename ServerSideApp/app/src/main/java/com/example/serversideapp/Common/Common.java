@@ -28,7 +28,7 @@ public class Common {
 
 
 
-
+    public static final int PICK_IMAGE_REQUEST = 71;
 
     public static boolean isConnectedToInterner(Context context)
     {
