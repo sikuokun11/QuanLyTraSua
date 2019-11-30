@@ -1,18 +1,11 @@
 package com.example.serversideapp.Common;
 
-
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
 import com.example.serversideapp.Model.Request;
-
 import com.example.serversideapp.Model.User;
 import com.example.serversideapp.Remote.IGeoCoordinates;
 import com.example.serversideapp.Remote.RetrofitClient;
@@ -26,33 +19,6 @@ public class Common {
 
     public  static String baseUrl = "https://maps.googlepis.com";
 
-
-
-    public static final int PICK_IMAGE_REQUEST = 71;
-
-    public static boolean isConnectedToInterner(Context context)
-    {
-
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        if(connectivityManager != null)
-        {
-            NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
-            if(info != null)
-            {
-                for(int i = 0; i<info.length;i++)
-                {
-                    if(info[i].getState() == NetworkInfo.State.CONNECTED)
-                        return true;
-                }
-
-            }
-
-        }
-
-        return false;
-    }
-
     public static String convertCodeToStatus(String code){
         if(code.equals("0"))
             return "Placed";
@@ -61,7 +27,6 @@ public class Common {
         else
             return "Shipped";
     }
-
 
     public static IGeoCoordinates getGeoCodeService(){
         return RetrofitClient.getClient(baseUrl).create(IGeoCoordinates.class);
@@ -88,7 +53,4 @@ public class Common {
     }
 
 
-
 }
-
-

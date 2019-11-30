@@ -17,13 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service
-            android:name=".Service.ListenOrder"
-            android:enabled="true"
-            android:exported="true"></service>
-
-        <activity android:name=".FoodList" />
-        <activity android:name=".OrderStatus" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,7 +31,7 @@
 
         <activity
             android:name=".TrackingOrder"
-            android:label="@string/title_activity_tracking_order" />
+            android:label="@string/title_activity_tracking_order"></activity>
         <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home_screen"

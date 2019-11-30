@@ -51,6 +51,7 @@ public class OrderStatus extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         loadOrders();
+
     }
 
     private void loadOrders(){
