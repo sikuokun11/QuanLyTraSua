@@ -41,7 +41,7 @@ public class OrderStatus extends AppCompatActivity {
 
         //Firebase
         db =  FirebaseDatabase.getInstance();
-        requests = db.getReference("Request");
+        requests = db.getReference("Requests");
 
         //Init
         recyclerView = (RecyclerView)findViewById(R.id.listOrders);
@@ -118,7 +118,7 @@ public class OrderStatus extends AppCompatActivity {
             }
         });
 
-        alertDialog.setNegativeButton("NP", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

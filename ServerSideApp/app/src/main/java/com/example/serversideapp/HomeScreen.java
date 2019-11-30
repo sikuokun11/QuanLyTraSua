@@ -101,14 +101,15 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
 
         switch (id){
             case R.id.nav_menu:
-            {
-                Intent orders = new Intent(HomeScreen.this, OrderStatus.class);
-                startActivity(orders);
-            }
 
             case R.id.nav_cart:
 
             case R.id.nav_orders:
+            {
+                Intent orderIntent = new Intent(HomeScreen.this,OrderStatus.class);
+                startActivity(orderIntent);
+                break;
+            }
 
             case R.id.nav_sign_out:
 
