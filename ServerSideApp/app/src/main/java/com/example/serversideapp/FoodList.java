@@ -105,7 +105,7 @@ public class FoodList extends AppCompatActivity {
     private void showAddFoodDialog() {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(FoodList.this);
-        alertDialog.setTitle("Add new Food");
+        alertDialog/setTitle("Add new Food");
         alertDialog.setMessage("Please fill full information");
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -207,7 +207,7 @@ public class FoodList extends AppCompatActivity {
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             //Don't worry about this error
                             double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mDialog.setMessage("Uploaded "+(int)progress+"%");
+                            mDialog.setMessage("Uploaded "+progress+"%");
                         }
                     });
         }
@@ -230,9 +230,9 @@ public class FoodList extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
-                foodViewHolder.food_name.setText(food.getName());
+                foodViewHolder.food_name.setText(model.getName());
                 Picasso.with(getBaseContext())
-                        .load(food.getImage())
+                        .load(model.getImage())
                         .into(foodViewHolder.food_image);
 
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
@@ -282,7 +282,7 @@ public class FoodList extends AppCompatActivity {
     private void showUpdateFoodDialog(final String key, final Food item) {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(FoodList.this);
-        alertDialog.setTitle("Edit Food");
+        alertDialog/setTitle("Edit Food");
         alertDialog.setMessage("Please fill full information");
 
         LayoutInflater inflater = this.getLayoutInflater();
@@ -330,10 +330,10 @@ public class FoodList extends AppCompatActivity {
 
 
                     //Update infomation
-                    item.setName(edtName.getText().toString());
-                    item.setPrice(edtPrice.getText().toString());
-                    item.setDiscount(edtDiscount.getText().toString());
-                    item.setDescription(edtDescription.getText().toString());
+                    item.setName();edtName.getText().toString();
+                    item.setPrice();edtPrice.getText().toString();
+                    item.setDiscount();edtDiscount.getText().toString();
+                    item.setDescription();edtDescription.getText().toString();
 
 
                     foodList.child(key).setValue(item);
