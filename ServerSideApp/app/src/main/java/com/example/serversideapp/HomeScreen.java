@@ -1,6 +1,5 @@
 package com.example.serversideapp;
 
-
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,12 +9,10 @@ import android.os.Bundle;
 import com.example.serversideapp.Common.Common;
 import com.example.serversideapp.Interface.ItemClickListener;
 import com.example.serversideapp.Model.Category;
-import com.example.serversideapp.Service.ListenOrder;
 import com.example.serversideapp.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -81,9 +78,12 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     Category newCategory;
 
     Uri saveUri;
-
+    private final int PICK_IMAGE_REQUEST = 71;
 
     DrawerLayout drawer;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,9 +143,6 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
-
-        Intent service = new Intent(HomeScreen.this, ListenOrder.class);
-        startService(service);
 
     }
 
@@ -244,7 +241,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                             //Don't worry about this error
                             double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mDialog.setMessage("Uploaded "+(int)progress+"%");
+                            mDialog.setMessage("Uploaded "+progress+"%");
                         }
                     });
         }
@@ -256,7 +253,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == Common.PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null)
         {
             saveUri = data.getData();
@@ -268,7 +265,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"), Common.PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_REQUEST);
     }
 
     private void loadMenu()  {
@@ -288,10 +285,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
                 menuViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        //send Category Id and Start new Activity
-                        Intent foodList = new Intent(HomeScreen.this,FoodList.class);
-                        foodList.putExtra("CategoryId",adapter.getRef(position).getKey());
-                        startActivity(foodList);
+                        //Code late
                     }
                 });
             }
@@ -326,11 +320,6 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
             case R.id.nav_cart:
 
             case R.id.nav_orders:
-            {
-                Intent orderIntent = new Intent(HomeScreen.this,OrderStatus.class);
-                startActivity(orderIntent);
-                break;
-            }
 
             case R.id.nav_sign_out:
 
