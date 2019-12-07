@@ -15,6 +15,7 @@ import android.location.Location;
 //import android.location.LocationListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.serversideapp.Common.Common;
@@ -71,7 +72,6 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_order);
-
         mService = Common.getGeoCodeService();
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED

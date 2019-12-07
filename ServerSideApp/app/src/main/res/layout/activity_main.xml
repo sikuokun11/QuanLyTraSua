@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_1"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
-
 
 
     <TextView
@@ -14,10 +13,10 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:text="@string/slogan"
         android:textColor="#030401"
         android:textSize="20sp"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -41,16 +40,18 @@
         android:layout_width="match_parent"
         android:layout_height="71dp"
         android:layout_marginStart="22dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="235dp"
         android:text="Sign In"
         android:textColor="@android:color/white"
         app:cornerRadius="5dp"
         app:fButtonColor="@color/btnSignActive"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
 
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtSlogan"
         app:shadowColor="@android:color/black"
         app:shadowHeight="5dp" />
 

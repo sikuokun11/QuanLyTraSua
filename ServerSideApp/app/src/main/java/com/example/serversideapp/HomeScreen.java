@@ -302,12 +302,12 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_screen, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.home_screen, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -321,9 +321,9 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         int id = menuItem.getItemId();
 
         switch (id){
-            case R.id.nav_menu:
-
-            case R.id.nav_cart:
+//            case R.id.nav_menu:
+//
+//            case R.id.nav_cart:
 
             case R.id.nav_orders:
             {
@@ -333,6 +333,11 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
             }
 
             case R.id.nav_sign_out:
+            {
+                Intent signIn = new Intent(HomeScreen.this,MainActivity.class);
+                startActivity(signIn);
+                break;
+            }
 
         }
 

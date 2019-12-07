@@ -1,6 +1,7 @@
 package com.example.serversideapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +40,9 @@ public class OrderStatus extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_status);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Order");
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         //Firebase
         db =  FirebaseDatabase.getInstance();
         requests = db.getReference("Requests");
@@ -52,7 +55,16 @@ public class OrderStatus extends AppCompatActivity {
 
         loadOrders();
     }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id ==  android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
 
+    }
     private void loadOrders(){
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(
                 Request.class,
